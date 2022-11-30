@@ -23,18 +23,30 @@ public class App {
 //            Passport passportIvan = new Passport(ivan, 1234);
 //
 //            ivan.setPassport(passportIvan);
+//            session.persist(ivan);
+
             /**
              * По человеку искать пасспорт
              */
-            Person p = session.get(Person.class,1);
+            Person p = session.get(Person.class, 1);
             System.out.println(p.getPassport().getPassportNumber());
-           // session.persist(ivan);
 
             /**
              * По паспорту найти человека
              */
-            Passport passport = session.get(Passport.class,1);
+            Passport passport = session.get(Passport.class, 1);
             System.out.println(passport.getPerson().getPassport());
+            /**
+             * Изменение данных паспорта по номеру
+             */
+            Person person = session.get(Person.class, 1);
+            person.getPassport().setPassportNumber(7777);
+            /**
+            * Удаление человека
+            */
+            Person person1 = session.get(Person.class,1);
+            session.remove(person1);
+
             transaction.commit();
             session.close();
         } finally {
